@@ -21,10 +21,11 @@ import okhttp3.Request;
 public class Offline_CacheData {
     /**
      * Interceptor to cache data and maintain it for a minute.
-     *
+     * <p>
      * If the same network request is sent within a minute,
      * the response is retrieved from cache.
      */
+
     public static class ResponseCacheInterceptor implements Interceptor {
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
@@ -37,7 +38,7 @@ public class Offline_CacheData {
 
     /**
      * Interceptor to cache data and maintain it for four weeks.
-     *
+     * <p>
      * If the device is offline, stale (at most four weeks old)
      * response is fetched from the cache.
      */

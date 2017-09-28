@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Connectivity>() {
                     @Override public void accept(final Connectivity connectivity) {
-                        toast.makeText(getApplicationContext(), connectivity.toString(), Toast.LENGTH_LONG).show();
+                        toast.makeText(getApplicationContext(), connectivity.getType(), Toast.LENGTH_LONG).show();
                         Log.d("Connection", connectivity.toString());
 
                     }

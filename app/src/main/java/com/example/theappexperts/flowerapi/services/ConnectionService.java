@@ -15,21 +15,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by TheAppExperts on 27/09/2017.
  */
 
-    public class ConnectionService {
+public class ConnectionService {
 
-        static Retrofit retrofit;
-        static OkHttpClient okHttpClient;
+    static Retrofit retrofit;
+    static OkHttpClient okHttpClient;
 
-        public static reqInterface getConnectionService(){
+    public static reqInterface getConnectionService() {
 
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(API_Constants.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build();
+        okHttpClient = buildClient();
 
-            return retrofit.create(reqInterface.class);
-        }
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_Constants.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+
+        return retrofit.create(reqInterface.class);
+    }
 
     public static OkHttpClient buildClient() {
 //
@@ -40,8 +43,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
         builder.addInterceptor(interceptor).build();
         // Enable response caching
-        builder .addNetworkInterceptor(new Offline_CacheData.ResponseCacheInterceptor());
-        builder .addInterceptor(new Offline_CacheData.OfflineResponseCacheInterceptor())
+        builder.addNetworkInterceptor(new Offline_CacheData.ResponseCacheInterceptor());
+        builder.addInterceptor(new Offline_CacheData.OfflineResponseCacheInterceptor())
                 // Set the cache location and size (5 MB)
                 .cache(new okhttp3.Cache(new File(MyApp
                         .getContext().getCacheDir(),

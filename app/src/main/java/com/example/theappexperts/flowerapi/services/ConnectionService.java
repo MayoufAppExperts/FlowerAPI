@@ -45,7 +45,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
                 // Set the cache location and size (5 MB)
                 .cache(new okhttp3.Cache(new File(MyApp
                         .getContext().getCacheDir(),
-                        "apiResponses"), 5  1024  1024));
+                        "apiResponses"), 5 * 1024 * 1024));
         return new OkHttpClient();
 
 
